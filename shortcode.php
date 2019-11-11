@@ -82,6 +82,8 @@ function get_top_3_populatiry_posts( $posts_populatiry_array ) {
 
 			if ( $post_id ) {
 
+				// todo: Edit html and styles for posts
+
 				$out .= '<div id="post-' . $post_id . '">
 					<a href="' . get_the_permalink( $post_id ) . '">
 						<div class="post-title">' . get_the_title( $post_id ) . '</div>';

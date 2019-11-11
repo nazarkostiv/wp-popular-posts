@@ -1,4 +1,3 @@
-
 jQuery(function (){
 	jQuery('#ecl_del').click(function (){
 		event.preventDefault();

@@ -19,24 +19,18 @@ function popular_posts_admin_page_init() {
 		if ( get_option( 'include_array' ) ) delete_option( 'include_array' );
 		if ( get_option( 'posts_option' ) ) delete_option( 'posts_option' );
 		if ( get_option( 'posts_categories' ) ) delete_option( 'posts_categories' );
-
-		echo 'All options deleted.';
 	} else {
 
 		if ( isset( $_POST['posts'] ) ) {
-
 			$views_option = sanitize_text_field( $_POST['posts'] );
-
 		} elseif ( !empty( get_option( 'posts_option' ) ) ) {
-
 			$views_option = get_option( 'posts_option' );
-
 		} else {
 			$views_option = '';
 		}
 
 		if ( isset( $_POST['submit'] ) ) {
-			check_admin_referer( 'popular-posts', 'qwerty' );
+			check_admin_referer( 'popular-posts', '4jQqZ}@v8Sr+He(u' );
 			update_option( 'posts_option', $views_option );
 
 			if ( !isset( $_POST['posts_exlude_array'] ) AND get_option( 'exlude_array' ) ) {
@@ -197,13 +191,12 @@ function popular_posts_admin_page_init() {
 
 			<button id="cat_del"><?= __( 'Clear' ) ?></button>
 
-			<?php wp_nonce_field( 'popular-posts','qwerty' ); ?>
+			<?php wp_nonce_field( 'popular-posts', '4jQqZ}@v8Sr+He(u' ); ?>
 			<br>
 			<br>
 
 			<input type="submit" name="delete" value="Delete Options" class="button button-primary">
 			<input type="submit" name="submit" id="submit" class="button button-primary" value="<?= __( 'Save Changes ') ?>">
-			<?php //submit_button(); ?>
 
 		</form>
 	</div>

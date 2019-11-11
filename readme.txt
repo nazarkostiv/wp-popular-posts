@@ -1,0 +1,1 @@
+To get popular posts, use the shortcode [popular_posts]
