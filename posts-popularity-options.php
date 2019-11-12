@@ -29,7 +29,7 @@ function set_cookie_by_post( $post_id, $attr, $days_to_expire ) {
 function set_post_views( $post_id ) {
 	$count_key = 'post_views_count';
 	$count = get_post_meta( $post_id, $count_key, true );
-	if ( $count=='' ) {
+	if ( $count == '' ) {
 		$count = 1;
 		delete_post_meta( $post_id, $count_key );
 		add_post_meta( $post_id, $count_key, $count );

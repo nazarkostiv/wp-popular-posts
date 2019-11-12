@@ -57,14 +57,14 @@ function popular_posts_admin_page_init() {
 			$exlude_array = isset( $_POST['posts_exlude_array'] ) ? (array) $_POST['posts_exlude_array'] : get_option( 'exlude_array' );
 			$exlude_array = array_map( 'esc_attr', $exlude_array );
 
-			if( $views_option == 'all' ) {
+			if ( $views_option == 'all' ) {
 				update_option( 'exlude_array', $exlude_array );
 			} 
 
 			$include_array = isset( $_POST['posts_include_array'] ) ? (array) $_POST['posts_include_array'] : get_option( 'include_array' );
 			$include_array = array_map( 'esc_attr', $include_array );
 
-			if( $views_option == 'custom' ) {
+			if ( $views_option == 'custom' ) {
 				update_option( 'include_array', $include_array );
 			}
 		}
@@ -75,7 +75,7 @@ function popular_posts_admin_page_init() {
 	?> 
 
 	<div class="wrap">
-		<h2><?php echo get_admin_page_title() ?></h2>
+		<h2><?= get_admin_page_title() ?></h2>
 		<form action="" method="POST">
 
 			<h3><?= __( 'Posts' ) ?></h3>
@@ -100,8 +100,7 @@ function popular_posts_admin_page_init() {
 
 							if ( $exlude_array ) {
 								$check = in_array( $post_id, $exlude_array ) == true ? 'selected' : '';
-							}
-							?>
+							} ?>
 
 							<option value="<?= $post_id ?>" <?= $check; ?>><?php the_title(); ?></option>
 
@@ -113,7 +112,7 @@ function popular_posts_admin_page_init() {
 				</div>
 
 			<?php else :
-				echo __( 'Post not find' );
+				echo __( 'No posts found' );
 			endif; ?>
 
 			<button id="ecl_del"><?= __( 'Clear' ) ?></button><br><hr>
@@ -121,11 +120,7 @@ function popular_posts_admin_page_init() {
 			<input type="radio" id="custom_posts" name="posts" value="custom" <?= $views_option == 'custom' ? 'checked' : ''; ?>><?= __('Custom'); ?><br>
 			<label for="posts_include"><?= __( 'Chose posts to include' ); ?></label><br>
 
-			<?php 
-			$query_attr = array(
-				'post_type' => 'post'
-			);
-			$query_posts = new WP_Query( $query_attr ); 
+			<?php
 			if ( $query_posts->have_posts() ) : ?>
 
 				<div class="posts-wrapper">
@@ -139,8 +134,7 @@ function popular_posts_admin_page_init() {
 
 							if ( $include_array ) {
 								$check = in_array( $post_id, $include_array ) == true ? 'selected' : '';
-							}
-							?>
+							} ?>
 
 							<option value="<?= $post_id ?>" <?= $check; ?>><?php the_title(); ?></option>
 
@@ -152,7 +146,7 @@ function popular_posts_admin_page_init() {
 				</div>
 
 			<?php else :
-				echo __( 'Post not find' );
+				echo __( 'No posts found' );
 			endif; ?>
 
 			<button id="inc_del"><?= __( 'Clear' ) ?></button><br>
@@ -176,8 +170,7 @@ function popular_posts_admin_page_init() {
 
 							if ( $cat_option ) {
 								$check = in_array( $cat->term_id, $cat_option ) == true ? 'selected' : '';
-							}
-							?>
+							} ?>
 
 							<option value="<?= $cat->term_id ?>" <?= $check; ?>><?= $cat->name; ?></option>
 

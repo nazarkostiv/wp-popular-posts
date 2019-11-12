@@ -16,15 +16,15 @@ function popular_posts_shortcode_function( $atts ){
 		    'posts_per_page' 	=> -1
 	    );
 
-		if( $views_option == 'all' ) {
+		if ( $views_option == 'all' ) {
 			
 			if( !empty( $exlude_array ) ) {
 				$args['post__not_in'] = $exlude_array;
 			}
 			
-		} elseif( $views_option == 'custom' ) {
+		} elseif ( $views_option == 'custom' ) {
 
-			if( !empty( $include_array ) ) {
+			if ( !empty( $include_array ) ) {
 				$args['post__in'] = $include_array;
 			} else {
 				return;
@@ -39,7 +39,6 @@ function popular_posts_shortcode_function( $atts ){
 		}
 
 	    $query_posts = new WP_Query( $args );
-
 	    $posts_populatiry_array = array();
 
 	    if ( $query_posts->have_posts() )
@@ -62,8 +61,8 @@ function popular_posts_shortcode_function( $atts ){
 
 function get_top_3_populatiry_posts( $posts_populatiry_array ) {
 
-	$top_3_populatiry_posts_array = array();
-	$out = '';
+	$top_3_populatiry_posts_array 	= array();
+	$out 							= '';
 
 	for ( $i = 0; $i <= 2; $i++ ) {
 
@@ -81,22 +80,25 @@ function get_top_3_populatiry_posts( $posts_populatiry_array ) {
 		foreach ( $top_3_populatiry_posts_array as $post_id ) {
 
 			if ( $post_id ) {
+				$post_object 	= get_post( $post_id );
+				$post_url 		= get_the_permalink( $post_id );
+				$post_title 	= get_the_title( $post_id );
+				$thumbnail_url 	= wp_get_attachment_url( get_post_thumbnail_id( $post_id ), 'thumbnail' );
+				$post_content 	= strip_shortcodes( $post_object->post_content );
 
 				// todo: Edit html and styles for posts
 
 				$out .= '<div id="post-' . $post_id . '">
-					<a href="' . get_the_permalink( $post_id ) . '">
-						<div class="post-title">' . get_the_title( $post_id ) . '</div>';
+					<a href="' . $post_url . '">
+						<div class="post-title">' . $post_title . '</div>';
 
 				if ( $thumbnail_url ) {
-					$out .= '<div class="post-thumbnail"><img src="' . wp_get_attachment_url( get_post_thumbnail_id( $post_id ), 'thumbnail' ) . '"></div>';
+					$out .= '<div class="post-thumbnail"><img src="' . $thumbnail_url . '"></div>';
 				}
 
 				$out .= '</a>';
 
-				$out .= get_post_views( $post_id );
-
-				//$out .= '<div class="entry-content">' . apply_filters('the_content', get_post_field('post_content', $post_id)) . '</div>';
+				$out .= '<div class="entry-content">' . $post_content . '</div>';
 
 				$out .= '</div>';
 			}
